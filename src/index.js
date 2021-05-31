@@ -2,15 +2,7 @@ import './sass/main.scss';
 import countryCardTlp from './partials/country-card.hbs';
 import debounce from 'lodash.debounce';
 
-// const refs = {
-//   input: document.querySelector('[data-action="searchCountry"]'),
-// };
-
-// refs.input.addEventListener('input', debounce(onInputCountry, 500));
-
-// function onInputCountry() {}
-
-fetch('https://restcountries.eu/rest/v2/name/Colombia')
+fetch('https://restcountries.eu/rest/v2/alpha/ukr')
   .then(response => {
     return response.json();
   })
@@ -22,3 +14,22 @@ fetch('https://restcountries.eu/rest/v2/name/Colombia')
   .catch(err => {
     console.log(err);
   });
+
+// const refs = {
+//   input: document.querySelector('[data-action="searchCountry"]'),
+// };
+
+// refs.input.addEventListener('input', debounce(onInputCountry, 500));
+
+// function fetchCountry(country) {
+//   return fetch(`https://restcountries.eu/rest/v2/name/${country}`).then(
+//     response => {
+//       return response.json();
+//     },
+//   );
+// }
+
+// function onInputCountry(evt) {
+//   evt.preventDefault();
+//   const countryName = evt.target.value;
+// }
