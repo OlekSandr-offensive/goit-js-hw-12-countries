@@ -2,22 +2,24 @@ import './sass/main.scss';
 import countryCardTlp from './partials/country-card.hbs';
 import debounce from 'lodash.debounce';
 
-fetch('https://restcountries.eu/rest/v2/alpha/ukr')
+const refs = {
+  cardContainer: document.querySelector('.js-card-container'),
+  input: document.querySelector('[data-action="searchCountry"]'),
+};
+
+fetch('https://restcountries.eu/rest/v2/name/canada')
   .then(response => {
     return response.json();
   })
   .then(country => {
     console.log(country);
     const markup = countryCardTlp(country);
+    refs.cardContainer.innerHTML = markup;
     console.log(markup);
   })
   .catch(err => {
     console.log(err);
   });
-
-// const refs = {
-//   input: document.querySelector('[data-action="searchCountry"]'),
-// };
 
 // refs.input.addEventListener('input', debounce(onInputCountry, 500));
 

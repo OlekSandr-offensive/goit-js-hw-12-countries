@@ -1,15 +1,19 @@
-<div class='card'>
-  <h1 class='country'>Country {{name}}</h1>
-  <div class='card-img'>
-    <img src=''{{flag}}'' alt=''{{name}}'' />
+{{#each this}}
+  <div class='card'>
+    <h1 class='card-country'>{{name}}</h1>
+    <div class='card-box'>
+      <div class='card-img'>
+        <img src={{flag}} alt={{name}} width='300px' />
+      </div>
+      <div class='card-body'>
+        <h2 class='capital'>Capital: {{capital}}</h2>
+        <p class='people'>Population: {{population}}</p>
+        <ul class='languages'>Languages:
+          {{#each languages}}
+            <li class='speech'>{{this.name}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
   </div>
-  <div class='card-body'>
-    <h2 class='capital'>Capital:{{capital}}</h2>
-    <p class='people'>Population:{{population}}</p>
-    <ul class='languages'>languages:
-      {{#each languages}}
-        <li class='speech'>{{this.name}}</li>
-      {{/each}}
-    </ul>
-  </div>
-</div>
+{{/each}}
