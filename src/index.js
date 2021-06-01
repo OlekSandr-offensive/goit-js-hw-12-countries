@@ -1,37 +1,28 @@
 import './sass/main.scss';
 import countryCardTlp from './partials/country-card.hbs';
 import debounce from 'lodash.debounce';
+import API from './partials/fetchCountries';
+import getRefs from './partials/get-refs';
 
-const refs = {
-  cardContainer: document.querySelector('.js-card-container'),
-  input: document.querySelector('[data-action="searchCountry"]'),
-};
+const refs = getRefs();
 
-fetch('https://restcountries.eu/rest/v2/name/canada')
-  .then(response => {
-    return response.json();
-  })
-  .then(country => {
-    console.log(country);
-    const markup = countryCardTlp(country);
-    refs.cardContainer.innerHTML = markup;
-    console.log(markup);
-  })
-  .catch(err => {
-    console.log(err);
+refs.searchCountry.addEventListener('input', debounce(onSearch, 500));
+
+function onSearch(e) {
+  e.preventDefault();
+
+  const searchQuery = e.target.value;
+
+  API.fetchCountries(searchQuery).then(renderCountryCard).catch(onFetchError);
+}
+
+function renderCountryCard(country) {
+  const markup = countryCardTlp(country);
+  refs.cardContainer.innerHTML = markup;
+}
+
+function onFetchError() {
+  alert({
+    text: 'Notice me, senpai!',
   });
-
-// refs.input.addEventListener('input', debounce(onInputCountry, 500));
-
-// function fetchCountry(country) {
-//   return fetch(`https://restcountries.eu/rest/v2/name/${country}`).then(
-//     response => {
-//       return response.json();
-//     },
-//   );
-// }
-
-// function onInputCountry(evt) {
-//   evt.preventDefault();
-//   const countryName = evt.target.value;
-// }
+}
