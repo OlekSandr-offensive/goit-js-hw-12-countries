@@ -27,13 +27,23 @@
 }
 
 // my card
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
 
 .box-search {
-  padding: 100px 300px 100px 300px;
+  display: flex;
+  width: 800px;
+  // padding: 100px 300px 100px 300px;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
 .search-input {
-  width: 500px;
+  width: 800px;
   height: 50px;
 }
 
@@ -45,4 +55,32 @@
   color: #424242;
   max-width: 960px;
   padding: 16px;
+}
+
+.card-country {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-body {
+  width: 200px;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.languages {
+  padding: 0;
+  margin: 0;
+}
+
+.speech {
+  margin-left: 30px;
 }

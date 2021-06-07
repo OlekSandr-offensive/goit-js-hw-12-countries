@@ -13,9 +13,9 @@ import * as PNotifyMobile from '@pnotify/mobile';
 defaultModules.set(PNotifyMobile, {});
 
 alert({
-  text: 'Notice me, senpai!',
+  text: 'Too many matches found. Please enter a more specific query!',
 });
-// defaultModules.set(PNotifyMobile, {});
+defaultModules.set(PNotifyMobile, {});
 
 // const myStack = new PNotify.Stack({ dir1: 'down', firstpos1: 25 });
 // PNotify.notice({
@@ -32,7 +32,10 @@ function onSearch(e) {
 
   const searchQuery = e.target.value;
 
-  API.fetchCountries(searchQuery).then(renderCountryCard).catch(onFetchError);
+  API.fetchCountries(searchQuery)
+    .then(renderCountryCard)
+    .catch(onFetchError)
+    .finally(clearPageMarkup);
 }
 
 function renderCountryCard(country) {
@@ -40,8 +43,19 @@ function renderCountryCard(country) {
   refs.cardContainer.innerHTML = markup;
 }
 
+function clearPageMarkup(e) {
+  if (e.target.value.length === 0) {
+    refs.cardContainer.innerHTML = ' ';
+    return;
+  }
+  // refs.cardContainer.innerHTML = ' ';
+  console.log('hello Vova');
+}
+
 function onFetchError() {
-  return notice({
-    text: "I'm a notice.",
-  });
+  console.log('hello Sasha');
+  // return PNotify.error({
+  //   text: 'Too many matches found. Please enter a more specific query!',
+  //   modules: new Map([...PNotify.defaultModules, [PNotifyDesktop, {}]]),
+  // });
 }
