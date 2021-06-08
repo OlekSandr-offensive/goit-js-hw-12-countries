@@ -27,7 +27,7 @@ function renderCountryCard(country) {
   if (country.length === 1) {
     const markup = countryCardTlp(country);
     refs.cardContainer.innerHTML = markup;
-  } else if (country.length < 10) {
+  } else if (country.length <= 10) {
     const markup = listCountryTlp(country);
     refs.cardContainer.innerHTML = markup;
   } else if (country.length > 10) {
