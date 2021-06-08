@@ -1,5 +1,6 @@
 import { error } from '@pnotify/core';
 import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
 import './sass/main.scss';
 import countryCardTlp from './partials/country-card.hbs';
 import listCountryTlp from './partials/list-country-card.hbs';
@@ -14,9 +15,10 @@ refs.searchCountry.addEventListener('input', debounce(onSearch, 500));
 function onSearch(e) {
   e.preventDefault();
 
+  refs.cardContainer.innerHTML = ' ';
   const searchQuery = e.target.value;
   if (searchQuery.length === 0) {
-    refs.cardContainer.innerHTML = ' ';
+    return;
   }
   API.fetchCountries(searchQuery).then(renderCountryCard).catch(onFetchError);
 }
@@ -28,7 +30,7 @@ function renderCountryCard(country) {
   } else if (country.length < 10) {
     const markup = listCountryTlp(country);
     refs.cardContainer.innerHTML = markup;
-  } else {
+  } else if (country.length > 10) {
     onFetchError();
   }
 }
